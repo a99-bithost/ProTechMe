@@ -1,8 +1,8 @@
 {
   "name": "protechme",
-  "productName": "protechme",
+  "productName": "ProTechMe",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Online Protection by TechMe Gawler",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -13,7 +13,7 @@
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "user",
+  "author": "a99-bithost",
   "license": "MIT",
   "config": {
     "forge": {
