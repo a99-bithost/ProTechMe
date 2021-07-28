@@ -1,5 +1,12 @@
 /* Description: Custom JS file */
 
+// IPC RENDERER FUNCTIONS //
+
+const ipcRenderer = require("electron").ipcRenderer;
+
+connect() = ipcRenderer.send("connect", )
+
+
 /* Navigation*/
 // Collapse the navbar by adding the top-nav-collapse class
 window.onscroll = function () {
@@ -102,4 +109,8 @@ function scrollFunctionBTT() {
 function topFunction() {
 	document.body.scrollTop = 0; // for Safari
 	document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
+}
+// Functions that send ipc requests to the backend ipcmain process
+function connect() {
+
 }
