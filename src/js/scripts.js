@@ -2,10 +2,6 @@
 
 // IPC RENDERER FUNCTIONS //
 
-const ipcRenderer = require("electron").ipcRenderer;
-
-connect() = ipcRenderer.send("connect", )
-
 
 /* Navigation*/
 // Collapse the navbar by adding the top-nav-collapse class
@@ -35,9 +31,7 @@ for (let i = 0; i < elements.length; i++) {
 	});
 }
 
-document.querySelector(".navbar-toggler").addEventListener("click", () => {
-  	document.querySelector(".offcanvas-collapse").classList.toggle("open");
-});
+
 
 // Hover on desktop
 function toggleDropdown(e) {
@@ -111,6 +105,3 @@ function topFunction() {
 	document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
 // Functions that send ipc requests to the backend ipcmain process
-function connect() {
-
-}
