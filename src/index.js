@@ -1,32 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { stdout, stderr } = require('process');
-const sudo = require('sudo-prompt');
 //const Sudoer = require('electron-sudo').default;
-const options = {};
-
-  
-
-
-ipcMain.on("connect-to-server", (event, args) => {
-// Option 1: sudo-prompt, tests throw error running
-// openvpn, but can run echo hello without an issue
-//
-  sudo.exec('openvpn', options,
-    function (error, stdout, stderr) {
-      if (error) throw error;
-      console.log(args, 'stdout: ' + stdout);
-    })
-//
-// Option 2: electron-sudo, not yet tested
-//
-// sudoer.spawn('openvpn', '--config client.ovpn');
-// })
-
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
-}
 
 const createWindow = () => {
   // Create the browser window.
@@ -52,4 +27,40 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
+
+ipcMain.on("connect-to-server", (event, args) => {
+  // Option 1: sudo-prompt, tests throw error running
+  // openvpn, but can run echo hello without an issue
+  //
+  //  sudo.exec('', options,
+  //    function (error, stdout, stderr) {
+  //      if (error) throw error;
+  //      console.log(args, 'stdout: ' + stdout);
+  //    }
+  //  );
+  //
+  // Option 2: electron-sudo, not yet tested
+  //
+  // sudoer.spawn('openvpn', '--config client.ovpn');
+  
+  const { spawn } = require('child_process');
+const ls = spawn('openvpn', ['--config', 'resources\\app\\src\\client.ovpn']);
+
+ls.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+
+ls.stderr.on('data', (data) => {
+  console.error(`stderr: ${data}`);
+});
+
+ls.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
+
 })
+  
+  // Handle creating/removing shortcuts on Windows when installing/uninstalling.
+  if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
+    app.quit();
+  } 
